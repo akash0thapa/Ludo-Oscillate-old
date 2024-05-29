@@ -6,7 +6,8 @@ public class PlayerPiece : MonoBehaviour
 {
     public bool canMove;
     public bool moveNow;
-    public int numberOfStepsToMove;
+    public bool isReady;
+    public int numberOfStepsAlreadyMoved=0;
     public PathPointsParent pathPoints;
 
     private void Awake()

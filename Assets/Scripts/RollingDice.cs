@@ -17,20 +17,7 @@ public class RollingDice : MonoBehaviour
     public void OnMouseDown(){
        generateRandomNumber = StartCoroutine("GenerateRandomNumberOnDice");
 }
-    /*public void Roll() {
-        if (Input.GetMouseButtonDown(0)) {
-            numberGot=Random.Range(0,6);
-            diceNumber.sprite = diceSprites[numberGot];
-            if (numberGot == 3) { numberGot = -1; }
-            else if (numberGot == 4) { numberGot = -2; }
-            else if (numberGot == 5) { numberGot = -3; }
-           else numberGot +=1;
-            
-        }
-    }*/
-
     IEnumerator GenerateRandomNumberOnDice() {
-       
         if (canDiceRoll == true)
         {
             canDiceRoll = false;
@@ -44,6 +31,8 @@ public class RollingDice : MonoBehaviour
             else if (numberGot == 4) { numberGot = -2; }
             else if (numberGot == 5) { numberGot = -3; }
             else numberGot += 1;
+            GameManager.gameManager.moveSteps = numberGot;
+            GameManager.gameManager.rolledDice = this;
             diceNumber.gameObject.SetActive(true);
             rollingDiceAnim.SetActive(false);
             canDiceRoll = true;
