@@ -4,82 +4,34 @@ using UnityEngine;
 
 public class YellowPlayerPiece : PlayerPiece
 {
-    // Start is called before the first frame update
-    private RollingDice rollDice;
+    RollingDice yellowRollingDice;
     private void Start()
     {
-        rollDice = GetComponentInParent<YellowHome>().rollingDice;
+        yellowRollingDice = GetComponentInParent<YellowHome>().rollingDice;
     }
-    private void OnMouseDown()
-    {
 
+    public void OnMouseDown()
+    {
         if (GameManager.gameManager.rolledDice != null)
         {
-            if (isReady == false)
+            if (!isReady)
             {
-                if (GameManager.gameManager.rolledDice == rollDice && GameManager.gameManager.moveSteps == 1)
+                if (GameManager.gameManager.rolledDice == yellowRollingDice && GameManager.gameManager.moveSteps ==3 && GameManager.gameManager.canPlayerMove == true  )
                 {
-                    MakePlayerReadyToMove();
+                    GameManager.gameManager.yellowPlayerOut++;
+                    MakePlayerReadyToMove(pathParent.yellowPathPoints);
+                    GameManager.gameManager.moveSteps = 0;
+                    return;
                 }
             }
-        }
-        if (GameManager.gameManager.rolledDice == rollDice && isReady)
-        {
-            canMove = true;
-        }
-
-        StartCoroutine("MoveStepsEnum");
-    }
-    IEnumerator MoveStepsEnum()
-    {
-        yield return new WaitForSeconds(0.25f);
-        int numberOfStepsToMove = GameManager.gameManager.moveSteps;
-        int temp = numberOfStepsAlreadyMoved + numberOfStepsToMove;
-        if (canMove == true)
-        {
-            if (numberOfStepsToMove > 0)
+            if (GameManager.gameManager.rolledDice == yellowRollingDice && isReady && GameManager.gameManager.canPlayerMove == true)
             {
-                if (numberOfStepsAlreadyMoved + numberOfStepsToMove <= 33)
-                {
-                    for (int i = numberOfStepsAlreadyMoved - 1; i < (numberOfStepsAlreadyMoved + numberOfStepsToMove - 1); i++)
-                    {
-                        transform.position = pathPoints.yellowPathPoints[i + 1].transform.position;
-                        yield return new WaitForSeconds(0.25f);
-                    }
-                    numberOfStepsAlreadyMoved += numberOfStepsToMove;
-                }
-            }
-            else
-            {
-                if (numberOfStepsAlreadyMoved < 30)
-                {
-                    if (numberOfStepsAlreadyMoved + numberOfStepsToMove > 0)
-                    {
-                        for (int i = numberOfStepsAlreadyMoved - 1; i >= (numberOfStepsAlreadyMoved + numberOfStepsToMove - 1); i--)
-                        {
-
-                            transform.position = pathPoints.yellowPathPoints[i].transform.position;
-                            yield return new WaitForSeconds(0.25f);
-
-                        }
-                        numberOfStepsAlreadyMoved += numberOfStepsToMove;
-                    }
-                    else
-                    {
-                        yield break;
-                    }
-                }
-
+                GameManager.gameManager.canPlayerMove = false;
+                MovePlayer(pathParent.yellowPathPoints);
             }
         }
     }
-    private void MakePlayerReadyToMove()
-    {
-        isReady = true;
-        transform.position = transform.position = pathPoints.yellowPathPoints[0].transform.position;
-        numberOfStepsAlreadyMoved = 0;
-    }
-    public void Onclick()
+    public void OnClick()
     {
         OnMouseDown();
     }

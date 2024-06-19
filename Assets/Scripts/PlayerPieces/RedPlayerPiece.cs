@@ -1,87 +1,42 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class RedPlayerPiece : PlayerPiece
 {
-    // Start is called before the first frame update
-    private RollingDice rollDice;
+
+    RollingDice redRollingDice;
     private void Start()
     {
-        rollDice = GetComponentInParent<RedHome>().rollingDice;
+        redRollingDice=GetComponentInParent<RedHome>().rollingDice;
     }
-    private void OnMouseDown()
-    {
 
+    public void OnMouseDown()
+    {       
         if (GameManager.gameManager.rolledDice != null)
-        {
-            if (isReady == false)
             {
-                if (GameManager.gameManager.rolledDice == rollDice && GameManager.gameManager.moveSteps == 1)
-                {
-                    MakePlayerReadyToMove();
-                }
-            }
-        }
-        if (GameManager.gameManager.rolledDice == rollDice && isReady)
-        {
-            canMove = true;
-        }
-
-        StartCoroutine("MoveStepsEnum");
-    }
-    IEnumerator MoveStepsEnum()
-    {
-        yield return new WaitForSeconds(0.25f);
-        int numberOfStepsToMove = GameManager.gameManager.moveSteps;
-        int temp = numberOfStepsAlreadyMoved + numberOfStepsToMove;
-        if (canMove == true)
-        {
-            if (numberOfStepsToMove > 0)
+            if (!isReady)
             {
-                if (numberOfStepsAlreadyMoved + numberOfStepsToMove <=33)
+                if (GameManager.gameManager.rolledDice == redRollingDice && GameManager.gameManager.moveSteps == 3 && GameManager.gameManager.canPlayerMove == true)
                 {
-                    for (int i = numberOfStepsAlreadyMoved - 1; i < (numberOfStepsAlreadyMoved + numberOfStepsToMove - 1); i++)
-                    {
-                        transform.position = pathPoints.redPathPoints[i + 1].transform.position;
-                        yield return new WaitForSeconds(0.25f);
-                    }
-                    numberOfStepsAlreadyMoved += numberOfStepsToMove;
+                    GameManager.gameManager.redPlayerOut++;
+                    MakePlayerReadyToMove(pathParent.redPathPoints);
+                    GameManager.gameManager.moveSteps = 0;
+                    return;
                 }
             }
             else
-            {
-                if (numberOfStepsAlreadyMoved < 30)
-                {
-                    if (numberOfStepsAlreadyMoved + numberOfStepsToMove > 0)
-                {
-                    for (int i = numberOfStepsAlreadyMoved - 1; i >= (numberOfStepsAlreadyMoved + numberOfStepsToMove - 1); i--)
+            {      
+            if (GameManager.gameManager.rolledDice == redRollingDice && GameManager.gameManager.canPlayerMove == true)
                     {
-
-                        transform.position = pathPoints.redPathPoints[i].transform.position;
-                        yield return new WaitForSeconds(0.25f);
-
+                        GameManager.gameManager.canPlayerMove = false;
+                        MovePlayer(pathParent.redPathPoints);
+                        return;
                     }
-                    numberOfStepsAlreadyMoved += numberOfStepsToMove;
-                }
-                else
-                {
-                    yield break;
-                }
-            }
-
-            }
+                }          
         }
+      
     }
-    private void MakePlayerReadyToMove()
-    {
-        isReady = true;
-        transform.position = transform.position = pathPoints.redPathPoints[0].transform.position;
-        numberOfStepsAlreadyMoved = 0;
-    }
-    public void Onclick()
+    public void OnClick()
     {
         OnMouseDown();
     }
-
 }

@@ -152,7 +152,7 @@ Animator:
   m_GameObject: {fileID: 234342204592263240}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7ea487bf123aba9448d979d990b87e2f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 61234aed5cd99e44d9a93b606db46a8d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -305,7 +305,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 393967e45cd307a47986730dfbd6ce02, type: 3}
   - {fileID: 21300000, guid: f1129600107efd6429772d2b68288d18, type: 3}
   rollingDiceAnim: {fileID: 234342204592263240}
-  canDiceRoll: 1
 --- !u!114 &2061163115185437151
 MonoBehaviour:
   m_ObjectHideFlags: 0
