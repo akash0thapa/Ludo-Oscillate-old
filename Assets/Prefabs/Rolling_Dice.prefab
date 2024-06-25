@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 10ec39087892ddb4db960a040699ed99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 030cdc4bcd0e4aa4f80a16c1610d8cf7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_Size: {x: 2.1, y: 2.1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &683255073755075966
@@ -236,7 +236,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: a6277a9b805ee464bafdb9e2924fc09f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7bef9e61a21583142ab70bbb7bf4afbc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -274,9 +274,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3030808358303966232}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.27, y: -2.31, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5759147707546911532}
@@ -298,13 +298,14 @@ MonoBehaviour:
   numberGot: 0
   diceNumber: {fileID: 3935762210691088836}
   diceSprites:
-  - {fileID: 21300000, guid: 10ec39087892ddb4db960a040699ed99, type: 3}
-  - {fileID: 21300000, guid: 7974b84b414988c4b9c25f70fcab6993, type: 3}
-  - {fileID: 21300000, guid: a6277a9b805ee464bafdb9e2924fc09f, type: 3}
-  - {fileID: 21300000, guid: 030cdc4bcd0e4aa4f80a16c1610d8cf7, type: 3}
-  - {fileID: 21300000, guid: 393967e45cd307a47986730dfbd6ce02, type: 3}
-  - {fileID: 21300000, guid: f1129600107efd6429772d2b68288d18, type: 3}
+  - {fileID: 21300000, guid: 7bef9e61a21583142ab70bbb7bf4afbc, type: 3}
+  - {fileID: 21300000, guid: de34758732b93c14c9f8517475fcdd24, type: 3}
+  - {fileID: 21300000, guid: 2305e81de7c4fa94d9887f2e4cd32d31, type: 3}
+  - {fileID: 21300000, guid: ada2de22c5876a14c89eede7c454c38e, type: 3}
+  - {fileID: 21300000, guid: 76de4811465ae70498d573958c2b169c, type: 3}
+  - {fileID: 21300000, guid: 1b82903416908104d9ec91d88d954967, type: 3}
   rollingDiceAnim: {fileID: 234342204592263240}
+  playerPiece: {fileID: 0}
 --- !u!114 &2061163115185437151
 MonoBehaviour:
   m_ObjectHideFlags: 0

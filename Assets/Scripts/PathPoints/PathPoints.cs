@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PathPoints : MonoBehaviour
 {
@@ -164,32 +163,4 @@ public class PathPoints : MonoBehaviour
     } 
 }
 
-        /*  
-          bool isOdd = (playersCount % 2 == 0) ? false : true;
-          int extent = (playersCount / 2);
-          int count = 0;
-        
-        if (isOdd)
-          {
-              for (int i = -extent; i <= extent; i++)
-              {
-                  piecesList[count].transform.localScale = new Vector3(pathParent.scales[playersCount - 1], pathParent.scales[playersCount - 1], 1f);
-
-                  piecesList[count].transform.position = new Vector3(transform.position.x + (i * pathParent.positionDifference[playersCount - 1]), transform.position.y, 0f);
-              }            
-          }
-          else {
-              for (int i = -extent; i < extent; i++)
-              {
-                  piecesList[count].transform.localScale = new Vector3(pathParent.scales[playersCount - 1], pathParent.scales[playersCount - 1], 1f);
-
-                  piecesList[count].transform.position = new Vector3(transform.position.x + (i * pathParent.positionDifference[playersCount - 1]), transform.position.y, 0f);
-              }
-          }
-  */
-
-
-        /*for (int i = 0; i < playersCount; i++) {
-            piecesList[i].GetComponentInChildren<SpriteRenderer>().sortingOrder=SpriteLayer;
-            SpriteLayer++;
-        }*/
+     
