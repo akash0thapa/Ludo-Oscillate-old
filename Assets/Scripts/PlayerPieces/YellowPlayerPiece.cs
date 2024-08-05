@@ -27,7 +27,8 @@ public class YellowPlayerPiece : PlayerPiece
             if (GameManager.gameManager.rolledDice == yellowRollingDice && isReady && GameManager.gameManager.canPlayerMove == true)
             {
                 GameManager.gameManager.canPlayerMove = false;
-                MovePlayer(pathParent.yellowPathPoints);
+                MovePlayer(pathParent.yellowPathPoints);              
+                return;
             }
         }
     }

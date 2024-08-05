@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: -3141966836417741822}
   m_Layer: 0
   m_Name: Player_BluePiece
-  m_TagString: Player_Piece
+  m_TagString: BluePlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,7 +333,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 0.381, b: 1, a: 1}
+  m_Color: {r: 0.08627451, g: 0.6117647, b: 0.9098039, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -358,10 +358,10 @@ MonoBehaviour:
   isReady: 0
   numberOfStepsToMove: 0
   numberOfStepsAlreadyMoved: 0
-  total: 0
   pathParent: {fileID: 0}
   prevPathPoint: {fileID: 0}
   currentPathPoint: {fileID: 0}
+  moveDirection: 0
 --- !u!58 &-4602389673774382349
 CircleCollider2D:
   m_ObjectHideFlags: 0

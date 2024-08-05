@@ -189,10 +189,10 @@ MonoBehaviour:
   isReady: 0
   numberOfStepsToMove: 0
   numberOfStepsAlreadyMoved: 0
-  total: 0
   pathParent: {fileID: 0}
   prevPathPoint: {fileID: 0}
   currentPathPoint: {fileID: 0}
+  moveDirection: 0
 --- !u!58 &9172860472695857948
 CircleCollider2D:
   m_ObjectHideFlags: 0

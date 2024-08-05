@@ -36,36 +36,31 @@ public class PlayerPiece : MonoBehaviour
         numberOfStepsToMove = GameManager.gameManager.moveSteps;
         if (GameManager.gameManager.moveSteps > 0)
         {
-            
-            if (numberOfStepsAlreadyMoved + GameManager.gameManager.moveSteps <= 33)
+
+            if (IsPathAvailableToMove(numberOfStepsToMove, numberOfStepsAlreadyMoved, pathParent_))
             {
                 moveDirection = true;
                 for (int i = numberOfStepsAlreadyMoved - 1; i < (numberOfStepsAlreadyMoved + numberOfStepsToMove - 1); i++)
                 {
+                  if(GameManager.gameManager.sound)  GameManager.gameManager.audioPlay.Play();
                     transform.position = pathParent_[i + 1].transform.position;
                     yield return new WaitForSeconds(0.25f);
                 }
-                numberOfStepsAlreadyMoved += numberOfStepsToMove;        
+                numberOfStepsAlreadyMoved += numberOfStepsToMove;
             }
-
         }
         else
         {
-            if (numberOfStepsAlreadyMoved < 30)
-            {
-                if (numberOfStepsAlreadyMoved + GameManager.gameManager.moveSteps > 0)
-                {
-                    moveDirection = false;
-                    for (int i = numberOfStepsAlreadyMoved - 1; i >= (numberOfStepsAlreadyMoved + numberOfStepsToMove - 1); i--)
+            if(IsPathAvailableToMove( numberOfStepsToMove, numberOfStepsAlreadyMoved,  pathParent_)) {
+                moveDirection = false;
+                    for (int i = numberOfStepsAlreadyMoved - 1; i > (numberOfStepsAlreadyMoved + numberOfStepsToMove - 1); i--)
                     {
-                        transform.position = pathParent_[i].transform.position;
-                        yield return new WaitForSeconds(0.25f);
-
+                    if (GameManager.gameManager.sound) GameManager.gameManager.audioPlay.Play();
+                    transform.position = pathParent_[i].transform.position;
+                    yield return new WaitForSeconds(0.25f);
                     }
                     numberOfStepsAlreadyMoved += numberOfStepsToMove;
-                    
-                }               
-            }
+            }                          
         }
         
         GameManager.gameManager.RemovePoint(prevPathPoint);
@@ -99,6 +94,7 @@ public class PlayerPiece : MonoBehaviour
     {
         
         isReady = true;
+        if (GameManager.gameManager.sound) GameManager.gameManager.audioPlay.Play();
         transform.position = pathParent_[0].transform.position;
         numberOfStepsAlreadyMoved = 1;
         GameManager.gameManager.moveSteps = 0;
@@ -108,5 +104,26 @@ public class PlayerPiece : MonoBehaviour
         currentPathPoint.AddPlayerPieces(this);
         GameManager.gameManager.AddPoint(currentPathPoint);
         GameManager.gameManager.transferDice = false;
+    }
+
+    bool IsPathAvailableToMove(int numberOfStepsToMove, int numberOfStepsAlreadyMoved, PathPoints[] pathParent_) {
+        if (numberOfStepsAlreadyMoved >= 30)
+        {
+            if (numberOfStepsAlreadyMoved + GameManager.gameManager.moveSteps <= 33)
+            {
+                return true;
+            }
+            else return false;
+        }
+        if (numberOfStepsAlreadyMoved < 30)
+        {
+            if (numberOfStepsAlreadyMoved + GameManager.gameManager.moveSteps > 0)
+            {
+                return true;
+            } 
+            else return false;
+        }         
+        else 
+            return false;   
     }
 }

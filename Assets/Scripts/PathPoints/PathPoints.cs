@@ -8,7 +8,6 @@ public class PathPoints : MonoBehaviour
     public PathPointsParent pathParent;
     public List<PlayerPiece> piecesList = new List<PlayerPiece>();
     PathPoints[] reverseMovePath;
-    //public GameObject blueStartPoint;
 
     private void Start()
     {
@@ -16,6 +15,11 @@ public class PathPoints : MonoBehaviour
     }
     public bool AddPlayerPieces(PlayerPiece piece)
     {
+        if (this.name=="Final PathPoint") {
+            AddPlayer(piece);
+            complete(piece);
+            return false;
+        }
         if (!pathParent.safePathPoints.Contains(this))
         {
             if (piecesList.Count == 1)
@@ -36,6 +40,39 @@ public class PathPoints : MonoBehaviour
         AddPlayer(piece);
         return true;
     }
+    public void complete(PlayerPiece piece) {
+        int player;
+        if (piece.name.Contains("Red"))
+        {
+            player=GameManager.gameManager.redPlayerOut -= 1;
+        }
+        else if (piece.name.Contains("Blue"))
+        {
+            player=GameManager.gameManager.bluePlayerOut -= 1;
+        }
+        else if (piece.name.Contains("Yellow"))
+        {
+            player=GameManager.gameManager.yellowPlayerOut -= 1;
+        }
+        else
+        {
+            player=GameManager.gameManager.greenPlayerOut -= 1;
+        }
+        if (player == 0) {
+            Debug.Log(piece.name + "Won");
+            int a=GameManager.gameManager.rollingDiceList.Count;        
+            for(int i = 0; i < a; i++)
+            {
+                string temp = GameManager.gameManager.rollingDiceList[i].name;
+                if (GameManager.gameManager.rollingDiceList[i].name==temp){
+                    GameManager.gameManager.transferDice = true;
+                    GameManager.gameManager.rollingDiceTransfer();
+                    GameManager.gameManager.rollingDiceList.Remove(GameManager.gameManager.rollingDiceList[i]);
+                    break;
+                }
+            }
+        }
+    }
 
     public IEnumerator RevertToStart(PlayerPiece piece) {
         if (piece.name.Contains("RedPiece"))
@@ -45,7 +82,7 @@ public class PathPoints : MonoBehaviour
                 piece.transform.position = reverseMovePath[i].transform.position;
                 yield return new WaitForSeconds(0.05f);
             }
-            piece.transform.position = new Vector3(1.16f, -0.039f, 0f);
+            piece.transform.position = new Vector3(1.16f, -0.642f, 0f);
             GameManager.gameManager.redPlayerOut--;
         }
         else if (piece.name.Contains("BluePiece"))
@@ -57,7 +94,7 @@ public class PathPoints : MonoBehaviour
                 piece.transform.position = reverseMovePath[i].transform.position;
                 yield return new WaitForSeconds(0.05f);
             }
-            piece.transform.position = new Vector3(-1.159f, -0.017f, 0f);
+            piece.transform.position = new Vector3(-1.159f, -0.62f, 0f);
             GameManager.gameManager.bluePlayerOut--;
         }
         else if (piece.name.Contains("YellowPiece"))
@@ -68,7 +105,7 @@ public class PathPoints : MonoBehaviour
                 piece.transform.position = reverseMovePath[i].transform.position;
                 yield return new WaitForSeconds(0.05f);
             }
-            piece.transform.position = new Vector3(-1.14f, 2.29f, 0f);
+            piece.transform.position = new Vector3(-1.14f, 1.687f, 0f);
             GameManager.gameManager.yellowPlayerOut--;
         }
         else
@@ -79,7 +116,7 @@ public class PathPoints : MonoBehaviour
                 piece.transform.position = reverseMovePath[i].transform.position;
                 yield return new WaitForSeconds(0.05f);
             }
-            piece.transform.position = new Vector3(1.18f, 2.28f, 0f);
+            piece.transform.position = new Vector3(1.18f, 1.677f, 0f);
             GameManager.gameManager.greenPlayerOut--;
         }
         piece.isReady = false;
@@ -137,7 +174,7 @@ public class PathPoints : MonoBehaviour
                 piecesList[0].transform.localScale = new Vector3(0.3f, 0.3f, 1f);
                 piecesList[1].transform.localScale = new Vector3(0.3f, 0.3f, 1f);
                 piecesList[0].transform.position = new Vector3(transform.position.x + 0.075f, transform.position.y, 0f);
-                piecesList[1].transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+                piecesList[1].transform.position = new Vector3(transform.position.x-0.075f, transform.position.y, 0f);
                 break;
 
             case 3:

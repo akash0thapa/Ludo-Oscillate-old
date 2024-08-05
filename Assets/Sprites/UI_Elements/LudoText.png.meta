@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c8178c7bb0d0d564dbce15048f501d97
+guid: 804fb2cec06303e40be16be3c18bab69
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -134,18 +134,106 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Oscillate (7) (1)_0
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 610
+        width: 430
+        height: 430
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2258c5dc714a8444db3b102dc0428919
+      internalID: -1174509464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Oscillate (7) (1)_1
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 607
+        width: 430
+        height: 430
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d107e525bee78514fb841d93fa2aa510
+      internalID: -1632182658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Oscillate (7) (1)_2
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 42
+        width: 430
+        height: 430
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49711591adcbfcb4297185951be32054
+      internalID: -158422283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Oscillate (7) (1)_3
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 43
+        width: 430
+        height: 430
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89d6e00ac72d656478d3c4ecf7b052a9
+      internalID: -399615704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: bc07068919606de42848cb571cd3a204
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Oscillate (7) (1)_0: -1174509464
+      Oscillate (7) (1)_1: -1632182658
+      Oscillate (7) (1)_2: -158422283
+      Oscillate (7) (1)_3: -399615704
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

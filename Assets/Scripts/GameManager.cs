@@ -20,13 +20,20 @@ public class GameManager : MonoBehaviour
     public int redPlayerOut;
     public int greenPlayerOut;
     public int yellowPlayerOut;
+
+    public int totalPlayersNumbers;
+    public List<GameObject>playersHomes;
+
+    public AudioSource audioPlay;
+    public bool sound = true;
+
     private void Awake()
     {
         gameManager=this;
-        rollingDiceList[0].playerPiece = playerPieceList[0];
-        rollingDiceList[1].playerPiece = playerPieceList[1];
-        rollingDiceList[2].playerPiece = playerPieceList[2];
-        rollingDiceList[3].playerPiece = playerPieceList[3];
+        for (int i=0; i < rollingDiceList.Count; i++){
+            rollingDiceList[i].playerPiece = playerPieceList[i];
+        }
+        audioPlay=GetComponent<AudioSource>();
     }
 
     public void AddPoint(PathPoints point)
@@ -45,18 +52,47 @@ public class GameManager : MonoBehaviour
     {
         if (transferDice && moveSteps!=0)
         {
-            int nextDice;  
-            for (int i = 0; i < rollingDiceList.Count; i++)
-            {
-                if (i == rollingDiceList.Count - 1) { nextDice = 0; } else { nextDice = i + 1; }
-                if (rolledDice == rollingDiceList[i]) {
-                    rollingDiceList[i].gameObject.SetActive(false);
-                    rollingDiceList[nextDice].gameObject.SetActive(true);   
-                
-                }
-            }
-        }
+            TransferRollingDice();
+
+        }    
             canDiceRoll = true;
             transferDice = false;
+    }
+    public void TransferRollingDice()
+    {
+        switch (totalPlayersNumbers) { 
+        case 2:
+                if (rolledDice == rollingDiceList[0])
+                {
+                    rollingDiceList[0].gameObject.SetActive(false);
+                    rollingDiceList[2].gameObject.SetActive(true);
+                }
+                else
+                {
+                    rollingDiceList[2].gameObject.SetActive(false);
+                    rollingDiceList[0].gameObject.SetActive(true);
+                }
+                break;
+
+
+        case 4:
+                int nextDice;
+                for (int i = 0; i < rollingDiceList.Count; i++)
+                {
+                    if (i == rollingDiceList.Count - 1) { nextDice = 0; } else { nextDice = i + 1; }
+                    if (rolledDice == rollingDiceList[i])
+                    {
+                        rollingDiceList[i].gameObject.SetActive(false);
+                        rollingDiceList[nextDice].gameObject.SetActive(true);
+
+                    }
+                }
+                break;
+
+        default:
+                break;
+
+        }
+        
     }
 }

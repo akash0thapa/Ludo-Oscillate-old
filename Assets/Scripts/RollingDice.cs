@@ -13,7 +13,8 @@ public class RollingDice : MonoBehaviour
     Coroutine generateRandomNumber;
     public static  RollingDice rollingDice;
     public PlayerPiece playerPiece;
-    
+    public PathPoints[] currentPathPoints;
+    public Audio diceRollAudio;
     // Update is called once per frame
 
     public void OnMouseDown()
@@ -27,6 +28,7 @@ public class RollingDice : MonoBehaviour
         if (GameManager.gameManager.canDiceRoll)
         {         
             GameManager.gameManager.canDiceRoll = false;
+           if(GameManager.gameManager.sound) diceRollAudio.DiceRollAudio();
             diceNumber.gameObject.SetActive(false);
             rollingDiceAnim.SetActive(true);
             numberGot = Random.Range(0, 6);
@@ -40,8 +42,7 @@ public class RollingDice : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             diceNumber.gameObject.SetActive(true);
             rollingDiceAnim.SetActive(false);
-            yield return new WaitForSeconds(0.5f);
-
+            yield return new WaitForSeconds(0.3f);
             if (outPlayers() == 0)
             {
                 if (GameManager.gameManager.moveSteps != 3)
@@ -115,6 +116,7 @@ public class RollingDice : MonoBehaviour
         }
     }
 
+ 
     public void OnClick()
     {
         OnMouseDown();
