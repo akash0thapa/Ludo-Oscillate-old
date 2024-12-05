@@ -12,5 +12,4 @@ public class PathPointsParent : PathPoints
     public PathPoints[] safePathPoints;
     public float[] scales;
     public float[] positionDifference;
-
 }

@@ -13,18 +13,18 @@ public class PlayerPiece : MonoBehaviour
     public PathPoints currentPathPoint;
     public static PlayerPiece playerPiece;
     public bool moveDirection;
+    public int position;
 
-
-    private void Awake()
+    public void Awake()
     {
         pathParent = FindObjectOfType<PathPointsParent>();
         playerPiece =GetComponentInParent<PlayerPiece>();
+       
     }
 
     public void MovePlayer(PathPoints[] pathParent_)
     {
         playerMove = StartCoroutine(MovePlayer_enum(pathParent_));
-        
     }
     IEnumerator MovePlayer_enum(PathPoints[] pathParent_)
     {
@@ -38,46 +38,49 @@ public class PlayerPiece : MonoBehaviour
         {
 
             if (IsPathAvailableToMove(numberOfStepsToMove, numberOfStepsAlreadyMoved, pathParent_))
-            {
+            {               
                 moveDirection = true;
                 for (int i = numberOfStepsAlreadyMoved - 1; i < (numberOfStepsAlreadyMoved + numberOfStepsToMove - 1); i++)
                 {
-                  if(GameManager.gameManager.sound)  GameManager.gameManager.audioPlay.Play();
+                  if(GameManager.gameManager.sound)  GameManager.gameManager.pieceMoveSound.Play();
                     transform.position = pathParent_[i + 1].transform.position;
                     yield return new WaitForSeconds(0.25f);
                 }
                 numberOfStepsAlreadyMoved += numberOfStepsToMove;
+                
             }
         }
         else
         {
             if(IsPathAvailableToMove( numberOfStepsToMove, numberOfStepsAlreadyMoved,  pathParent_)) {
-                moveDirection = false;
+                moveDirection = true;
                     for (int i = numberOfStepsAlreadyMoved - 1; i > (numberOfStepsAlreadyMoved + numberOfStepsToMove - 1); i--)
                     {
-                    if (GameManager.gameManager.sound) GameManager.gameManager.audioPlay.Play();
+                    if (GameManager.gameManager.sound) GameManager.gameManager.pieceMoveSound.Play();
                     transform.position = pathParent_[i].transform.position;
                     yield return new WaitForSeconds(0.25f);
                     }
                     numberOfStepsAlreadyMoved += numberOfStepsToMove;
             }                          
         }
-        
+       
         GameManager.gameManager.RemovePoint(prevPathPoint);
         prevPathPoint.RemovePlayerPieces(this);
         currentPathPoint = pathParent_[numberOfStepsAlreadyMoved - 1];
         bool transfer=currentPathPoint.AddPlayerPieces(this);
         GameManager.gameManager.AddPoint(currentPathPoint);
         prevPathPoint = currentPathPoint;
+
         if (transfer)
         {
             if (GameManager.gameManager.moveSteps != 3 )
             {
+                yield return new WaitForEndOfFrame();
                 GameManager.gameManager.transferDice = true;
                 GameManager.gameManager.rollingDiceTransfer();
             }
         }
-        GameManager.gameManager.canPlayerMove = true;     
+   
         if (playerMove != null)
         {
             StopCoroutine(playerMove);
@@ -89,15 +92,18 @@ public class PlayerPiece : MonoBehaviour
         {
             Render.sortingOrder -= 20;
         }
+        GameManager.gameManager.canPlayerMove = true;
+        
     }
     public void MakePlayerReadyToMove(PathPoints[] pathParent_)
     {
         
         isReady = true;
-        if (GameManager.gameManager.sound) GameManager.gameManager.audioPlay.Play();
+        if (GameManager.gameManager.sound) GameManager.gameManager.pieceMoveSound.Play();
         transform.position = pathParent_[0].transform.position;
         numberOfStepsAlreadyMoved = 1;
         GameManager.gameManager.moveSteps = 0;
+        GameManager.gameManager.turnCompleted = false;
         GameManager.gameManager.rollingDiceTransfer();
         currentPathPoint = pathParent_[0];
         prevPathPoint = pathParent_[0];
@@ -106,23 +112,10 @@ public class PlayerPiece : MonoBehaviour
         GameManager.gameManager.transferDice = false;
     }
 
-    bool IsPathAvailableToMove(int numberOfStepsToMove, int numberOfStepsAlreadyMoved, PathPoints[] pathParent_) {
-        if (numberOfStepsAlreadyMoved >= 30)
-        {
-            if (numberOfStepsAlreadyMoved + GameManager.gameManager.moveSteps <= 33)
-            {
+    public bool IsPathAvailableToMove(int numberOfStepsToMove, int numberOfStepsAlreadyMoved, PathPoints[] pathParent_) {       
+            if (numberOfStepsAlreadyMoved + GameManager.gameManager.moveSteps <= 33 && numberOfStepsAlreadyMoved + GameManager.gameManager.moveSteps > 0){        
                 return true;
-            }
-            else return false;
-        }
-        if (numberOfStepsAlreadyMoved < 30)
-        {
-            if (numberOfStepsAlreadyMoved + GameManager.gameManager.moveSteps > 0)
-            {
-                return true;
-            } 
-            else return false;
-        }         
+            }      
         else 
             return false;   
     }
