@@ -47,7 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathParent: {fileID: 0}
   piecesList: []
-  winnerName: 
 --- !u!1 &4482747849650450665
 GameObject:
   m_ObjectHideFlags: 0
