@@ -8,8 +8,10 @@ public class PathPoints : MonoBehaviour
     public PathPointsParent pathParent;
     public List<PlayerPiece> piecesList = new List<PlayerPiece>();
     PathPoints[] reverseMovePath;
+    public string winnerName = null;
 
-    private void Start()
+
+    public void Start()
     {
         pathParent = GetComponentInParent<PathPointsParent>();
     }
@@ -18,10 +20,32 @@ public class PathPoints : MonoBehaviour
         if (this.name=="Final PathPoint") {
             AddPlayer(piece);
             complete(piece);
+            GameWon(piece);
             return false;
         }
-        if (!pathParent.safePathPoints.Contains(this))
+        for (int i = 0; i < 4; i++) {
+            if (piece.transform.position == pathParent.safePathPoints[i].transform.position ) {
+                Debug.Log("HEHHEHHEE");
+               if ( GameManager.gameManager.sound)
+                {
+                    GameManager.gameManager.pieceMoveSound.Pause();
+                    GameManager.gameManager.saveSound.Play();
+                }
+                else
+                {
+                    Debug.LogWarning("AudioManager is not initialized or sound is disabled.");
+                }
+            }
+        }
+        /*if (pathParent.safePathPoints.Contains(this))
         {
+            if (AudioManager.audioManager.sound)
+            {
+                AudioManager.audioManager.playSaveSound(); 
+            }
+        }*/
+        if (!pathParent.safePathPoints.Contains(this))
+        {         
             if (piecesList.Count == 1)
             {
                 string prePieceName = piecesList[0].name;
@@ -59,19 +83,35 @@ public class PathPoints : MonoBehaviour
             player=GameManager.gameManager.greenPlayerOut -= 1;
         }
         if (player == 0) {
-            Debug.Log(piece.name + "Won");
-            int a=GameManager.gameManager.rollingDiceList.Count;        
-            for(int i = 0; i < a; i++)
+            int a=GameManager.gameManager.rollingDiceList.Count;
+            string temp = piece.name;   
+            Debug.Log(temp);
+            int x=0;
+            for (int i = 0; i < a; i++)
             {
-                string temp = GameManager.gameManager.rollingDiceList[i].name;
-                if (GameManager.gameManager.rollingDiceList[i].name==temp){
+                string t = GameManager.gameManager.rollingDiceList[i].name.Substring(13);
+                Debug.Log(t);
+                if (temp.Contains(t)){
+                     x= i;
                     GameManager.gameManager.transferDice = true;
+                    GameManager.gameManager.turnCompleted = true;
                     GameManager.gameManager.rollingDiceTransfer();
                     GameManager.gameManager.rollingDiceList.Remove(GameManager.gameManager.rollingDiceList[i]);
+                    piece.gameObject.SetActive(false);
                     break;
                 }
             }
         }
+    }
+
+    public bool GameWon(PlayerPiece piece) {
+        if (piece.currentPathPoint.name == "Final PathPoint") {
+            GameManager.gameManager.winnerPiece = piece;
+           GameManager.gameManager.gamePanel.SetActive(false);
+            GameManager.gameManager.gameOverPanel.SetActive(true); 
+            return true;
+        }
+        return false;
     }
 
     public IEnumerator RevertToStart(PlayerPiece piece) {
@@ -80,6 +120,7 @@ public class PathPoints : MonoBehaviour
             reverseMovePath = pathParent.redPathPoints;
             for (int i = piece.numberOfStepsAlreadyMoved - 1; i >= 0; i--) {
                 piece.transform.position = reverseMovePath[i].transform.position;
+                if (GameManager.gameManager.sound) GameManager.gameManager.pieceMoveSound.Play();
                 yield return new WaitForSeconds(0.05f);
             }
             piece.transform.position = new Vector3(1.16f, -0.642f, 0f);
@@ -92,6 +133,7 @@ public class PathPoints : MonoBehaviour
             for (int i = piece.numberOfStepsAlreadyMoved - 1; i >= 0; i--)
             {
                 piece.transform.position = reverseMovePath[i].transform.position;
+                if (GameManager.gameManager.sound) GameManager.gameManager.pieceMoveSound.Play();
                 yield return new WaitForSeconds(0.05f);
             }
             piece.transform.position = new Vector3(-1.159f, -0.62f, 0f);
@@ -103,6 +145,7 @@ public class PathPoints : MonoBehaviour
             for (int i = piece.numberOfStepsAlreadyMoved - 1; i >= 0; i--)
             {
                 piece.transform.position = reverseMovePath[i].transform.position;
+                if (GameManager.gameManager.sound) GameManager.gameManager.pieceMoveSound.Play();
                 yield return new WaitForSeconds(0.05f);
             }
             piece.transform.position = new Vector3(-1.14f, 1.687f, 0f);
@@ -114,6 +157,7 @@ public class PathPoints : MonoBehaviour
             for (int i = piece.numberOfStepsAlreadyMoved - 1; i >= 0; i--)
             {
                 piece.transform.position = reverseMovePath[i].transform.position;
+                if (GameManager.gameManager.sound) GameManager.gameManager.pieceMoveSound.Play();
                 yield return new WaitForSeconds(0.05f);
             }
             piece.transform.position = new Vector3(1.18f, 1.677f, 0f);

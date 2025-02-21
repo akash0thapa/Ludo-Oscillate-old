@@ -24,77 +24,86 @@ public class RollingDice : MonoBehaviour
     }
     IEnumerator GenerateRandomNumberOnDice()
     {
-        yield return new WaitForEndOfFrame();
-        if (GameManager.gameManager.canDiceRoll)
-        {         
+        if (GameManager.gameManager.gameQuitCanvas.activeSelf)
+        {
             GameManager.gameManager.canDiceRoll = false;
-           if(GameManager.gameManager.sound) diceRollAudio.DiceRollAudio();
-            diceNumber.gameObject.SetActive(false);
-            rollingDiceAnim.SetActive(true);
-            numberGot = Random.Range(0, 6);
-            diceNumber.sprite = diceSprites[numberGot];
-            if (numberGot == 3) { numberGot = -1; }
-            else if (numberGot == 4) { numberGot = -2; }
-            else if (numberGot == 5) { numberGot = -3; }
-            else numberGot += 1;
-            GameManager.gameManager.moveSteps = numberGot;
-            GameManager.gameManager.rolledDice = this;
-            yield return new WaitForSeconds(0.5f);
-            diceNumber.gameObject.SetActive(true);
-            rollingDiceAnim.SetActive(false);
-            yield return new WaitForSeconds(0.3f);
-            if (outPlayers() == 0)
-            {
-                if (GameManager.gameManager.moveSteps != 3)
-                {
-                    GameManager.gameManager.transferDice = true;
-                    GameManager.gameManager.rollingDiceTransfer();
-                }
-            }
-            else
-            {                 
-                int total = playerPiece.numberOfStepsAlreadyMoved + GameManager.gameManager.moveSteps;
-                if (GameManager.gameManager.moveSteps > 0)
-                {
-                    if (total > 33)
-                    {
-                        GameManager.gameManager.transferDice = true;
-                        GameManager.gameManager.rollingDiceTransfer();
-                    }
-                    else
-                    {                     
-                        GameManager.gameManager.transferDice = false;
-                    }
-                }
-                else
-                {
-                    if (total <= 0)
-                    {
-                        GameManager.gameManager.transferDice = true;
-                        GameManager.gameManager.rollingDiceTransfer();
-                    }
-                    if (playerPiece.numberOfStepsAlreadyMoved >= 30)
-                    {
-                        GameManager.gameManager.transferDice = true;
-                        GameManager.gameManager.rollingDiceTransfer();
-                    }
-                    else
-                    {                     
-                        GameManager.gameManager.transferDice = false;
-                    }
-
-                }
-            }
-            
+        }
+        else {
+            GameManager.gameManager.canDiceRoll = true;
+        }
             yield return new WaitForEndOfFrame();
-            if (generateRandomNumber != null)
+            if (GameManager.gameManager.canDiceRoll)
             {
-                StopCoroutine(generateRandomNumber);
-            }
-            
+                GameManager.gameManager.canDiceRoll = false;
+                if (GameManager.gameManager.sound) diceRollAudio.DiceRollAudio();
+                diceNumber.gameObject.SetActive(false);
+                rollingDiceAnim.SetActive(true);
+                numberGot = Random.Range(0, 6);
+                diceNumber.sprite = diceSprites[numberGot];
+                if (numberGot == 3) { numberGot = -1; }
+                else if (numberGot == 4) { numberGot = -2; }
+                else if (numberGot == 5) { numberGot = -3; }
+                else numberGot += 1;
+                GameManager.gameManager.moveSteps = numberGot;
+                GameManager.gameManager.rolledDice = this;
+                yield return new WaitForSeconds(0.5f);
+                diceNumber.gameObject.SetActive(true);
+                rollingDiceAnim.SetActive(false);
+                yield return new WaitForSeconds(0.3f);
+                if (outPlayers() == 0)
+                {
+                    if (GameManager.gameManager.moveSteps != 3)
+                    {
+                        GameManager.gameManager.turnCompleted = true;
+                        GameManager.gameManager.transferDice = true;
+                        GameManager.gameManager.rollingDiceTransfer();
+                    }
+                }
+                if (outPlayers() != 0)
+                {
+                    int total = this.playerPiece.numberOfStepsAlreadyMoved + GameManager.gameManager.moveSteps;
+                    if (GameManager.gameManager.moveSteps > 0)
+                    {
+                        if (total > 33)
+                        {
+                            GameManager.gameManager.turnCompleted = true;
+                            GameManager.gameManager.transferDice = true;
+                            GameManager.gameManager.rollingDiceTransfer();
+                        }
+                        else
+                        {
+                            GameManager.gameManager.turnCompleted = false;
+                            GameManager.gameManager.transferDice = false;
+                        }
 
-        }   
-    }
+                    }
+                    else
+                    {
+                        if (total <= 0)
+                        {
+                            GameManager.gameManager.turnCompleted = true;
+                            GameManager.gameManager.transferDice = true;
+                            GameManager.gameManager.rollingDiceTransfer();
+                        }
+                        else
+                        {
+                            GameManager.gameManager.turnCompleted = false;
+                            GameManager.gameManager.transferDice = false;
+                        }
+
+                    }
+                }
+
+                yield return new WaitForEndOfFrame();
+                if (generateRandomNumber != null)
+                {
+                    StopCoroutine(generateRandomNumber);
+                }
+
+
+            }
+        }
+    
     
     public int outPlayers()
     {

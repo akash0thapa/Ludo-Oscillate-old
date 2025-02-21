@@ -4,26 +4,41 @@ using UnityEngine;
 
 public class Audio : MonoBehaviour
 {
-    public AudioSource audioPlay;
-
+    public AudioSource diceRollAudio, buttonClickAudio;
     public void Start()
     {
-        audioPlay = GetComponent<AudioSource>();
+        diceRollAudio = GetComponent<AudioSource>();
+        buttonClickAudio= GetComponent<AudioSource>();
     }
     public void DiceRollAudio() { 
-    audioPlay.Play();
+    diceRollAudio.Play();
     }
 
-    public void PauseAudio()
+    public void ButtonClickAudio() { 
+    buttonClickAudio.Play();
+    }
+
+   /* public void PlayMainMenuMusic() { 
+    GameManager.gameManager.mainMenuSound.Play();
+    }
+
+    public void PauseMainMenuMusic()
+    {
+        GameManager.gameManager.mainMenuSound.Pause();
+    }
+   */
+   /* public void PauseAudio()
     {
         GameManager.gameManager.sound = false;
         audioPlay.gameObject.SetActive(false);
-        GameManager.gameManager.audioPlay.gameObject.SetActive(false);
+        GameManager.gameManager.pieceMove.gameObject.SetActive(false);
     }
     public void PlayAudio()
     {
         GameManager.gameManager.sound = true ;
         audioPlay.gameObject.SetActive(true);
-        GameManager.gameManager.audioPlay.gameObject.SetActive(true);
-    }
+        GameManager.gameManager.pieceMove.gameObject.SetActive(true);
+    }*/
+
+   
 }
