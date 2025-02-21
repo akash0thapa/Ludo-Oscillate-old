@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,8 +13,10 @@ public class GameManager : MonoBehaviour
     public List<PathPoints> playersOnPathPoints=new List<PathPoints>();
     public bool canDiceRoll=true;
     public bool transferDice = false;
+    public bool turnCompleted=false;
 
-   public List<RollingDice> rollingDiceList;
+    public List<RollingDice> rollingDiceList;
+    public List<RollingDice> tempRollingDiceList;
     public List<PlayerPiece> playerPieceList;
 
     public int bluePlayerOut;
@@ -24,16 +27,40 @@ public class GameManager : MonoBehaviour
     public int totalPlayersNumbers;
     public List<GameObject>playersHomes;
 
-    public AudioSource audioPlay;
+    public AudioSource pieceMoveSound,saveSound,mainMenuSound;
     public bool sound = true;
 
+    public int pos=0;
+
+    public GameObject gamePanel;
+    public GameObject mainMenuPanel;
+    public GameObject gameOverPanel;
+    public PlayerPiece winnerPiece;
+    public GameObject gameQuitCanvas;
+
+    public Text text;
+
     private void Awake()
-    {
+    {   
         gameManager=this;
         for (int i=0; i < rollingDiceList.Count; i++){
             rollingDiceList[i].playerPiece = playerPieceList[i];
         }
-        audioPlay=GetComponent<AudioSource>();
+
+       // pieceMoveSound = GetComponent<AudioSource>();
+    }
+    private void Start()
+    {
+        if (mainMenuPanel.gameObject.activeSelf == true)
+        {
+            GameManager.gameManager.mainMenuSound.Play();
+
+
+        }
+        else
+        {
+            GameManager.gameManager.mainMenuSound.Pause();
+        }
     }
 
     public void AddPoint(PathPoints point)
@@ -50,14 +77,15 @@ public class GameManager : MonoBehaviour
 
     public void rollingDiceTransfer()
     {
-        if (transferDice && moveSteps!=0)
+        if (transferDice && moveSteps!=0 && turnCompleted)
         {
             TransferRollingDice();
 
         }    
             canDiceRoll = true;
             transferDice = false;
-    }
+            turnCompleted = false;
+    }  
     public void TransferRollingDice()
     {
         switch (totalPlayersNumbers) { 
@@ -73,10 +101,8 @@ public class GameManager : MonoBehaviour
                     rollingDiceList[0].gameObject.SetActive(true);
                 }
                 break;
-
-
         case 4:
-                int nextDice;
+                int nextDice=0;
                 for (int i = 0; i < rollingDiceList.Count; i++)
                 {
                     if (i == rollingDiceList.Count - 1) { nextDice = 0; } else { nextDice = i + 1; }
@@ -84,11 +110,9 @@ public class GameManager : MonoBehaviour
                     {
                         rollingDiceList[i].gameObject.SetActive(false);
                         rollingDiceList[nextDice].gameObject.SetActive(true);
-
                     }
                 }
                 break;
-
         default:
                 break;
 
