@@ -24,11 +24,10 @@ public class BluePlayerPiece : PlayerPiece
                     return;
                 }
             }
-            if (GameManager.gameManager.rolledDice == blueRollingDice && isReady && GameManager.gameManager.canPlayerMove == true && GameManager.gameManager.turnCompleted == false)
+            if (GameManager.gameManager.rolledDice == blueRollingDice && isReady && GameManager.gameManager.canPlayerMove == true)
             {
                 GameManager.gameManager.canPlayerMove = false;
                 MovePlayer(pathParent.bluePathPoints);
-                GameManager.gameManager.turnCompleted = true;
                 return;
             }
         }
