@@ -3,7 +3,7 @@ using UnityEngine;
 public class RedPlayerPiece : PlayerPiece
 {
 
-    public static RollingDice redRollingDice;
+    RollingDice redRollingDice;
     private void Start()
     {
         redRollingDice=GetComponentInParent<RedHome>().rollingDice;
@@ -25,11 +25,10 @@ public class RedPlayerPiece : PlayerPiece
             }
             else
             {      
-            if (GameManager.gameManager.rolledDice == redRollingDice && GameManager.gameManager.canPlayerMove == true&& GameManager.gameManager.turnCompleted ==false)
+            if (GameManager.gameManager.rolledDice == redRollingDice && GameManager.gameManager.canPlayerMove == true)
                     {
                         GameManager.gameManager.canPlayerMove = false;
-                    GameManager.gameManager.turnCompleted = true;
-                    MovePlayer(pathParent.redPathPoints);
+                        MovePlayer(pathParent.redPathPoints);
                         return;
                     }
                 }          
