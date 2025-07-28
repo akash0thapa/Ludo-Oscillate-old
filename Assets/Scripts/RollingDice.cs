@@ -28,13 +28,12 @@ public class RollingDice : MonoBehaviour
         {
             GameManager.gameManager.canDiceRoll = false;
         }
-        else {
-            GameManager.gameManager.canDiceRoll = true;
-        }
+        
             yield return new WaitForEndOfFrame();
             if (GameManager.gameManager.canDiceRoll)
             {
-                GameManager.gameManager.canDiceRoll = false;
+            GameManager.gameManager.canDiceRoll = false;
+            Debug.Log("dice cannot be rolled now");           
                 if (GameManager.gameManager.sound) diceRollAudio.DiceRollAudio();
                 diceNumber.gameObject.SetActive(false);
                 rollingDiceAnim.SetActive(true);

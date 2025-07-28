@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public int totalPlayersNumbers;
     public List<GameObject>playersHomes;
 
-    public AudioSource pieceMoveSound,saveSound,mainMenuSound;
+    public AudioSource pieceMoveSound,saveSound,mainMenuSound,winSound;
     public bool sound = true;
 
     public int pos=0;
@@ -39,7 +39,11 @@ public class GameManager : MonoBehaviour
     public GameObject gameQuitCanvas;
 
     public Text text;
-
+    public void Sound() {
+        if (sound == true) sound = false;
+        else
+            sound = true;
+    }
     private void Awake()
     {   
         gameManager=this;

@@ -109,6 +109,7 @@ public class PathPoints : MonoBehaviour
             GameManager.gameManager.winnerPiece = piece;
            GameManager.gameManager.gamePanel.SetActive(false);
             GameManager.gameManager.gameOverPanel.SetActive(true); 
+            GameManager.gameManager.winSound.Play();
             return true;
         }
         return false;

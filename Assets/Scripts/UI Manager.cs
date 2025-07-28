@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,7 +11,6 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverPanel;
     public static UIManager uimanager;
 
-  
     public void Game2Players() {
         GameManager.gameManager.playersHomes[1].SetActive(false);
         GameManager.gameManager.playersHomes[3].SetActive(false);
@@ -26,9 +26,11 @@ public class UIManager : MonoBehaviour
         GameManager.gameManager.mainMenuSound.Pause();
         gamePanel.SetActive(true);
     }
-    public void GameWon() { 
-    gameOverPanel.SetActive(true);
-    }
+    /*public void GameWon() { 
+    gameOverPanel.SetActive(false);
+    if(gameOverPanel.activeSelf==true)GameManager.gameManager.winSound.Play();
+  
+    }*/
 
     
     
