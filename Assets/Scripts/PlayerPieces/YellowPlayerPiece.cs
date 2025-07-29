@@ -24,12 +24,15 @@ public class YellowPlayerPiece : PlayerPiece
                     return;
                 }
             }
-            if (GameManager.gameManager.rolledDice == yellowRollingDice && GameManager.gameManager.canPlayerMove == true && GameManager.gameManager.turnCompleted == false)
+            else
             {
-                GameManager.gameManager.canPlayerMove = false;
-                GameManager.gameManager.turnCompleted = true;
-                MovePlayer(pathParent.yellowPathPoints);
-                return;
+                if (GameManager.gameManager.rolledDice == yellowRollingDice && GameManager.gameManager.canPlayerMove == true && GameManager.gameManager.turnCompleted == false)
+                {
+                    GameManager.gameManager.canPlayerMove = false;
+                    GameManager.gameManager.turnCompleted = true;
+                    MovePlayer(pathParent.yellowPathPoints);
+                    return;
+                }
             }
         }
 

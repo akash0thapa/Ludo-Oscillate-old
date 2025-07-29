@@ -16,7 +16,7 @@ public class BluePlayerPiece : PlayerPiece
         {
             if (!isReady)
             {
-                if (GameManager.gameManager.rolledDice == blueRollingDice && GameManager.gameManager.moveSteps == 3  && GameManager.gameManager.canPlayerMove == true)
+                if (GameManager.gameManager.rolledDice == blueRollingDice && GameManager.gameManager.moveSteps == 3 && GameManager.gameManager.canPlayerMove == true)
                 {
                     GameManager.gameManager.bluePlayerOut++;
                     MakePlayerReadyToMove(pathParent.bluePathPoints);
@@ -24,12 +24,15 @@ public class BluePlayerPiece : PlayerPiece
                     return;
                 }
             }
-            if (GameManager.gameManager.rolledDice == blueRollingDice && isReady && GameManager.gameManager.canPlayerMove == true && GameManager.gameManager.turnCompleted == false)
+            else
             {
-                GameManager.gameManager.canPlayerMove = false;
-                MovePlayer(pathParent.bluePathPoints);
-                GameManager.gameManager.turnCompleted = true;
-                return;
+                if (GameManager.gameManager.rolledDice == blueRollingDice && isReady && GameManager.gameManager.canPlayerMove == true && GameManager.gameManager.turnCompleted == false)
+                {
+                    GameManager.gameManager.canPlayerMove = false;
+                    MovePlayer(pathParent.bluePathPoints);
+                    GameManager.gameManager.turnCompleted = true;
+                    return;
+                }
             }
         }
     }
