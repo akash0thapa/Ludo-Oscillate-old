@@ -1,6 +1,7 @@
 # Ludo-Oscillate
 
 - A unique 2D board game, where dice has numbers 1,2,3,-1,-2,-3.
+- Black dots are the forward moves and red dots are backward moves.
 - Just like the name suggests, it's a game to move formard and backward.
 - With only one piece per player, roll the dice and play the game.
 - The one to reach the finishing point first is the winner.
