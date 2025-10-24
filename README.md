@@ -5,5 +5,5 @@
 - With only one piece per player, roll the dice and play the game.
 - The one to reach the finishing point first is the winner.
 
-![Image Alt](https://github.com/akash0thapa/Ludo-Oscillate-old/blob/8dfe79e8091bb48f916884f8af7e84e1727fe70c/img_1.jpg)
-
+![Image Alt](https://github.com/akash0thapa/Ludo-Oscillate-old/blob/933d1e49364a7b1cd8827ccdc455507ffce9a5ee/img_1.png)
+![Image Alt](https://github.com/akash0thapa/Ludo-Oscillate-old/blob/933d1e49364a7b1cd8827ccdc455507ffce9a5ee/img_1.png)
