@@ -6,4 +6,4 @@
 - The one to reach the finishing point first is the winner.
 
 ![Image Alt](https://github.com/akash0thapa/Ludo-Oscillate-old/blob/933d1e49364a7b1cd8827ccdc455507ffce9a5ee/img_1.png)
-![Image Alt](https://github.com/akash0thapa/Ludo-Oscillate-old/blob/933d1e49364a7b1cd8827ccdc455507ffce9a5ee/img_1.png)
+![Image Alt](https://github.com/akash0thapa/Ludo-Oscillate-old/blob/ed5bb82f8e67ddf07d494642d849b808a448733b/img_2.png)
